@@ -76,7 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 		.logout()
 				.logoutUrl("/ADM/logout")
-				.logoutSuccessUrl("/")
+				.logoutSuccessUrl("/ADM")
 				.invalidateHttpSession(true)
 				.permitAll();
 
@@ -115,7 +115,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    public DaoAuthenticationProvider authenticationProvider() {
 //        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 //        authenticationProvider.setUserDetailsService(userDetailService);
-//       // authenticationProvider.setPasswordEncoder(passwordEncoder()); //ÆÐ½º¿öµå¸¦ ¾ÏÈ£È° °æ¿ì »ç¿ëÇÑ´Ù
+//       // authenticationProvider.setPasswordEncoder(passwordEncoder()); //ï¿½Ð½ï¿½ï¿½ï¿½ï¿½å¸¦ ï¿½ï¿½È£È° ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 //        return authenticationProvider;
 //    }
 
