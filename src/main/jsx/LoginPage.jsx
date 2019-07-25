@@ -99,7 +99,11 @@ class LoginPage extends React.Component {
         return (
             <div className="container">
                 <div className="card card-login mx-auto mt-5">
-                    <div className="card-header"><center><img src="/images/noti_logo.png" width="35" height="35" /> <b>ADMIN LOGIN</b> <img src="/images/noti_logo.png" width="35" height="35" /></center></div>
+                    <div className="card-header"><center>
+                {/*<img src="/images/noti_logo.png" width="35" height="35" /> */}
+                <b>ADMIN LOGIN</b>
+                {/* <img src="/images/noti_logo.png" width="35" height="35" />*/}
+                </center></div>
                     <div className="card-body">
                         {/* <form action="/main.html" method="post"> */}
                         <form>
