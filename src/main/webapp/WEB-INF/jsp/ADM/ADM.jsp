@@ -132,7 +132,7 @@
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
 			<ul class="nav navbar-nav side-nav">
 				<!-- <li class="active"> -->
-				<li><a href="/main.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
+				<li><a href="ADM/mainPage.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
 				<!--                 <li>
                         <a href="/charts"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
