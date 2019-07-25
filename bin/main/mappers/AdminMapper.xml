@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.conco.concoadmin.mapper.AdminMapper">
+
+	<!-- ROLE 권한 체크하기 -->
+	<select id="adm_role_chk" resultType="map" parameterType="com.conco.concoadmin.vo.AdminVO">
+			SELECT
+				   ADMIN_ID
+				 , MEMBER_ROLE
+			 FROM ADMIN_MEMBER
+			WHERE ADMIN_ID = #{ADMIN_ID}
+	</select>
+
+	<!-- 로그인 체크하기 -->
+	<select id="admin_chk" resultType="map" parameterType="com.conco.concoadmin.vo.AdminVO">
+			SELECT
+			       ADMIN_ID
+			     , ADMIN_PASS
+			 FROM ADMIN_MEMBER
+			 WHERE ADMIN_ID= #{ADMIN_ID}
+			   AND ADMIN_USE = 'Y'
+	</select>
+	
+	<!--  관리자 정보  -->
+	<select id="getADMIN_INFO" resultType="com.conco.concoadmin.vo.AdminVO" parameterType="com.conco.concoadmin.vo.AdminVO">  
+			SELECT ADMIN_MEMBER_NUM
+                 , ADMIN_ID
+		         , ADMIN_NAME
+                 , ADMIN_REGDATE
+			  FROM ADMIN_MEMBER 
+			 WHERE ADMIN_ID = #{ADMIN_ID}
+			   AND ADMIN_USE = 'Y'
+	 </select>
+	 
+	<!-- 로그인 성공시 관리자 로그인 DATE 업데이트 -->
+	<update id="admin_setLoginDate" parameterType="com.conco.concoadmin.vo.AdminVO">
+			UPDATE 
+		       ADMIN_MEMBER
+		   SET ADMIN_LOGINDATE = #{ADMIN_LOGINDATE}
+		 WHERE ADMIN_MEMBER_NUM = #{ADMIN_MEMBER_NUM}
+	</update>
+	
+	<!-- login History -->
+	<insert id="login_history" parameterType="com.conco.concoadmin.vo.LoginHistroyVO">
+		INSERT
+		INTO
+		MEMBER_LOGIN (LOGIN_TYPE, MEMBER_NUM, LOGIN_ID, LOGIN_INFO, LOGIN_IP, LOGIN_BROWSER, LOGIN_OS,
+		LOGIN_COUNT)
+		VALUES (#{LOGIN_TYPE}, #{MEMBER_NUM}, #{LOGIN_ID}, #{LOGIN_INFO}, #{LOGIN_IP},
+		#{LOGIN_BROWSER}, #{LOGIN_OS}, #{LOGIN_COUNT})
+	</insert>
+	
+		 <!-- 관리자 History insert -->
+	 <insert id="insertADMIN_HISTORY" parameterType="com.conco.concoadmin.vo.AdminHistoryVO">
+			 INSERT
+			   INTO 
+	  ADMIN_HISTORY ( ADMIN_MEMBER_NUM, EXECUTE_KIND, REQUEST_PAGE, ADMIN_ACCOUNT, ADMIN_DESC, EXECUTE_REASON, EXECUTE_DATE) 
+		     VALUES ( #{ADMIN_MEMBER_NUM}, #{EXECUTE_KIND}, #{REQUEST_PAGE}, #{ADMIN_ACCOUNT}, #{ADMIN_DESC}, #{EXECUTE_REASON}, #{EXECUTE_DATE})
+	 </insert>
+	
+</mapper>
