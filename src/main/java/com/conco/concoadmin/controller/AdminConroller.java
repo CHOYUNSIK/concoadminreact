@@ -63,7 +63,7 @@ public class AdminConroller {
 	@RequestMapping(value = "/ADM/loginSuccess", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public HashMap<String, String> login_success(HttpSession session, HttpServletRequest request) throws Exception {
-		
+		System.out.println("aaaa");
 		HashMap<String, String> result = adminLoginService.login_success(session,request);
 		System.out.println(result+"   Successresult");
 		return result;
@@ -79,7 +79,7 @@ public class AdminConroller {
 	
 //	@RequestMapping("/signin")
 //	public String signindd( @RequestParam HashMap<String, String> commandMap) {
-//		System.out.println(commandMap+"    commandMapµé¾î¿Ô´Ù");
+//		System.out.println(commandMap+"    commandMapï¿½ï¿½ï¿½Ô´ï¿½");
 //		return "yes";
 //	}
 
@@ -90,7 +90,7 @@ public class AdminConroller {
 //	
 //	@RequestMapping("/test")
 //	public String test() throws Exception {
-//		System.out.println("ÄÁÆ®·Ñ·¯");
+//		System.out.println("ï¿½ï¿½Æ®ï¿½Ñ·ï¿½");
 //		List<TestVO> list = adminService.testList();
 //		System.out.println(list+"  listlistlistlist");
 //		return "ADM/ADM";

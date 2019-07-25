@@ -20,9 +20,9 @@ import com.conco.concoadmin.util.md5;
 import com.conco.concoadmin.vo.AdminVO;
 
 //type
-//1 : ¼º°ø
-//2 : Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌµğ
-//3 : ºñ¹Ğ¹øÈ£°¡ Æ²¸° À¯Àú
+//1 : ì„±ê³µ
+//2 : ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´ë””
+//3 : ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë¦° ìœ ì €
 //@Service
 @Component
 public class ConcoAuthenticationProvider implements AuthenticationProvider {
@@ -35,6 +35,8 @@ public class ConcoAuthenticationProvider implements AuthenticationProvider {
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
+		System.out.println("ConcoAuthenticationProvider ë“¤ì–´ì˜´");
+		
 		String user_id = (String) authentication.getPrincipal();
 		String user_pw = md5.testMD5((String) authentication.getCredentials());
 		AdminVO avo = new AdminVO();
@@ -43,23 +45,25 @@ public class ConcoAuthenticationProvider implements AuthenticationProvider {
 		avo.setADMIN_PASS(user_pw);
 
 		try {
-			//°ü¸®ÀÚ ID, PW Á¤º¸ °¡Á®¿À±â
+			//ê´€ë¦¬ì ID, PW ì •ë³´ ê°€ì ¸ì˜¤ê¸°
 			HashMap<String, String> admin_chk = adminMapper.admin_chk(avo);
 			
+			
+			
 			if ( admin_chk == null) {
-				throw new BadCredentialsException("{\"code\":\"1\", \"msg\":\"Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌµğ ÀÔ´Ï´Ù.\"}");
+				throw new BadCredentialsException("{\"code\":\"1\", \"msg\":\"ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´ë”” ì…ë‹ˆë‹¤.\"}");
 			}
 			
-			//°ü¸®ÀÚ ID , PW ¿©ºÎ Ã¼Å©
+			//ê´€ë¦¬ì ID , PW ì—¬ë¶€ ì²´í¬
 			if (user_id.equals(admin_chk.get("ADMIN_ID")) && user_pw.equals(admin_chk.get("ADMIN_PASS")) ) {
-				//ROLEÃ¼Å©
+				//ROLEì²´í¬
 //				HashMap<String, String> role_chk = sqlSession.selectOne("login.role_chk", vo);
 				HashMap<String, String> adm_role_chk = adminMapper.adm_role_chk(avo);
 				System.out.println(adm_role_chk+ "   adm_role_chk");
 				
 				avo.setMEMBER_ROLE(adm_role_chk.get("MEMBER_ROLE"));
 				
-				//°ü¸®ÀÚ°¡ °èÁ¤ ¿©ºÎ Ã¼Å© ÈÄ ·Ñ Ã¼Å©
+				//ê´€ë¦¬ìê°€ ê³„ì • ì—¬ë¶€ ì²´í¬ í›„ ë¡¤ ì²´í¬
 				if ( adm_role_chk.get("MEMBER_ROLE").equals("ROLE_ADMIN")) {
 					
 					List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
@@ -70,10 +74,10 @@ public class ConcoAuthenticationProvider implements AuthenticationProvider {
 			        
 					return result;
 				} else {
-					throw new BadCredentialsException("{\"code\":\"7\", \"msg\":\"°ü¸®ÀÚ ¿Ü¿¡ Á¢±ÙÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.\" , \"email\":\"" + user_id + "\"}");
+					throw new BadCredentialsException("{\"code\":\"7\", \"msg\":\"ê´€ë¦¬ì ì™¸ì— ì ‘ê·¼í•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\" , \"email\":\"" + user_id + "\"}");
 				}
 			} else {  
-				throw new BadCredentialsException("{\"code\":\"2\", \"msg\":\"ÀÔ·ÂÇÏ½Å Á¤º¸°¡ Àß¸øµÇ¾ú½À´Ï´Ù.\", \"email\":\"" + user_id + "\"}");
+				throw new BadCredentialsException("{\"code\":\"2\", \"msg\":\"ì…ë ¥í•˜ì‹  ì •ë³´ê°€ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤.\", \"email\":\"" + user_id + "\"}");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
