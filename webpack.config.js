@@ -7,6 +7,7 @@ module.exports = {
         page1: './Page1Page.jsx',
         table: './TablePage.jsx',
         login: './LoginPage.jsx',
+        userinfo: './UserInfoPage.jsx',
     },
     devtool: 'sourcemaps',
     cache: true,

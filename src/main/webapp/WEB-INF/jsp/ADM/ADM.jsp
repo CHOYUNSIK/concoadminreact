@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>CNCC Admin</title>
+<title>Admin</title>
 <!-- Bootstrap Core CSS -->
 <link href="/webjars/github-com-BlackrockDigital-startbootstrap-sb-admin/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom CSS -->
@@ -150,7 +150,7 @@
                     </li> -->
 				<li><a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-table"></i> 회원 <i class="fa fa-fw fa-caret-down"></i></a>
 					<ul id="demo" class="collapse">
-						<li><a href="table.html">회원 정보</a></li>
+						<li><a href="userinfo.html">회원 정보</a></li>
 						<li><a href="#">화원 관리</a></li>
 						<li><a href="#">회원 인증</a></li>
 					</ul></li>
